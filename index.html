@@ -440,30 +440,30 @@ h1, h2 {
 
         <div class="product">
             <img src="images/lipstick.jpg">
-            <h3>Velvet Lipstick</h3>
+            <h3>Lipstick</h3>
             <p>₱300</p>
-           <button onclick="addToCart('Velvet Lipstick', 300)">Add to Cart</button>
+           <button onclick="addToCart('Lipstick', 300)">Add to Cart</button>
         </div>
 
         <div class="product">
             <img src="images/highlight.jpg">
-            <h3>Silk Highlight</h3>
+            <h3>Shy Highlight</h3>
             <p>₱500</p>
-            <button onclick="addToCart('Silk Foundation' , 500)">Add to Cart</button>
+            <button onclick="addToCart('Shy Highlight' , 500)">Add to Cart</button>
         </div>
 
         <div class="product">
             <img src="images/blush.jpg">
-            <h3>Glow Blush</h3>
+            <h3>Pinky Blush</h3>
             <p>₱350</p>
-            <button onclick="addToCart('Glow Blush' , 350)">Add to Cart</button>
+            <button onclick="addToCart('Pinky Blush' , 350)">Add to Cart</button>
         </div>
 
         <div class="product">
             <img src="images/pallete.jpg">
-            <h3>Volume Pallete</h3>
+            <h3>Beau Pallete</h3>
             <p>₱400</p>
-            <button onclick="addToCart('Volume Mascara' , 400)">Add to Cart</button>
+            <button onclick="addToCart('Beau Pallete' , 400)">Add to Cart</button>
         </div>
 
     </div>
@@ -564,8 +564,31 @@ function addToCart(name, price){
 
 function goToCheckout(){
     showPage('contact');
+
+    if(cart.length === 0){
+        alert("Your cart is empty ❗");
+        return;
+    }
+
+    let message = "🛒 Order Details:\n\n";
+    let subtotal = 0;
+
+    cart.forEach(item => {
+        message += `• ${item.name} - ₱${item.price}\n`;
+        subtotal += item.price;
+    });
+
+    message += `\nSubtotal: ₱${subtotal}`;
+    message += `\nShipping: ₱50`;
+    message += `\nTotal: ₱${subtotal + 50}`;
+
+    // Put message into textarea
+    document.getElementById('contactMessage').value = message;
+
     alert("Proceeding to checkout ✨");
 }
+
+document.getElementById('contactMessage').scrollIntoView({ behavior: "smooth" });
 
 function displayCart(){
     let container = document.getElementById('cartItems');
